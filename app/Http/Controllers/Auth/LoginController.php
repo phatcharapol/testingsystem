@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+// ValidateLogin  Request
+use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -36,4 +40,40 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|email',
+            'password' => 'required|string',
+        ]);
+    }
+    public function redirectTo(){
+         // User role
+        $role = Auth::user()->role->id;
+        // Check user role
+        switch ($role) {
+            // Administrators
+            case '1':
+                    return '/admin';
+                break;
+            // Teacher
+            case '2':
+                    return '/teacher';
+                break;
+            // Student
+            case '3':
+                return '/student';
+                break;
+            default:
+                return '/login';
+                break;
+        }
+    }
+    public function username()
+    {
+        return 'email';
+    }
+
+
 }

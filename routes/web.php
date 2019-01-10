@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\CheckRole;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +20,53 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['admin']], function () {   
+    Route::get('admin', 'AdminController@index')->name('admin');
+    Route::resource('admin/user', 'AdminUserController',[
+        'as' => 'admin',
+    // 'names' => [
+    //     'index' => 'admin.user',
+        // 'store' => 'admin.user.store',
+        // 'create' => 'admin.user.create',
+        // 'update' => 'admin.user.update',
+        // 'destroy' => 'admin.user.destroy',
+        // 'show' => 'admin.user.show',
+        // 'edit' => 'admin.user.edit'
+        // ]
+    ]);
+    Route::resource('test/subject', 'TestSubjectController',[
+    'as' => 'test'
+    ]);
+    Route::resource('test/subject/content', 'TestContentController',[
+    'as' => 'test'
+    ]);
+    Route::resource('test/subject/content/question', 'TestQuestionController',[
+    'as' => 'test'
+    ]);
+    Route::get('/admin/chgpwd', 'AdminController@chgpwd')->name('admin.chgpwd');
+
+});
+Route::group(['middleware' => ['teacher']], function () {	
+    Route::get('/teacher', 'TeacherController@index')->name('teacher');
+	Route::resource('test/subject', 'TestSubjectController',[
+    'as' => 'test'
+    ]);
+    Route::resource('test/subject/content', 'TestContentController',[
+    'as' => 'test'
+    ]);
+    Route::resource('test/subject/content/question', 'TestQuestionController',[
+    'as' => 'test'
+    ]);
+	Route::get('/admin/chgpwd', 'AdminController@chgpwd')->name('admin.chgpwd');
+});
+
+
+Route::group(['middleware' => ['student']], function () {
+	Route::get('/student', 'StudentController@index')->name('student');
+});
+
+
+
+
+
