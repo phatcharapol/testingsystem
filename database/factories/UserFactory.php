@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'role_id' => 3,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => bcrypt('password'),
+        'password' => 'password',
         'remember_token' => str_random(10),
         'created_by'=>'System',
         'updated_by'=>'System'

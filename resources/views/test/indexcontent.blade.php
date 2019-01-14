@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+
 <div class="container">
 	{{ Breadcrumbs::render('test.subject.show',$testsubject) }}
 
@@ -61,6 +62,7 @@
 			 	<td> 			
 			 		<form method="post" action="{{route('test.content.destroy',$testcontent->id)}}">
 			 			@csrf
+			 			<input type="hidden" name="subject_id" value="{{$testsubject->id}}">
 			 			<input name="_method" type="hidden" value="DELETE">
 			 			<input type="submit" class="btn btn-danger delete" value="Delete" onclick ="confirmdelete()">
 			 		</form>

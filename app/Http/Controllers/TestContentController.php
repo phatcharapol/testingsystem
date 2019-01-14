@@ -18,6 +18,7 @@ class TestContentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -33,13 +34,12 @@ class TestContentController extends Controller
     public function store(TestContentRequest $request)
     {
         //
-        dd($request->all());
         $input=$request->all();
         $input['created_by'] = getUser();
         $input['updated_by'] = getUser();
         TestContent::create($input) ;
         Session::flash('msg','Content has been created..') ;
-        return redirect('test/content/') ;
+        return redirect('test/subject/'.$input['subject_id']);
     }
 
     /**
@@ -109,7 +109,7 @@ class TestContentController extends Controller
         $input['updated_by'] = getUser() ;
         $testcontent->update($input) ;
         Session::flash('msg','Content has been updated..') ;
-        return redirect('test/content/');
+        return redirect('test/subject/'.$input['subject_id']);
 
     }
 
@@ -122,8 +122,11 @@ class TestContentController extends Controller
     public function destroy($id)
     {
         //
-        TestContent::findOrFail($id)->delete() ;
+        $testcontent=TestContent::findOrFail($id) ;
+        $subject_id=$testcontent->subject_id ;
+        $testcontent->delete() ;
         Session::flash('msg','Subject has been deleted..') ;
-        return redirect('test/content');
+         return redirect('test/subject/'.$subject_id);
+    
     }
 }

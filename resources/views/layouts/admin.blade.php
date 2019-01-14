@@ -52,11 +52,13 @@
                     </li>
                      @if(Auth::user()->isAdmin())
                     <h3 class="menu-title">User</h3><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Manage User</a>
+                  {{--   <li class="menu-item-has-children dropdown"> --}}
+                    <li>
+                        <a href="{{route('admin.user.index')}}"><i class="menu-icon fa fa-dashboard"></i> Manage User</a>
+                       {{--  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Manage User</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-puzzle-piece"></i><a href="{{route('admin.user.index')}}">CRUD Admin</a></li>
-                        </ul>
+                        </ul> --}}
                     </li>
                     @endif
                     

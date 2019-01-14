@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 	
-
+	{{ Breadcrumbs::render('test.question.edit',$testsubject,$testcontent,$testquestion) }}
 	
 	{{-- Print Data Quesiton --}}
 

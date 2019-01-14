@@ -9,7 +9,7 @@
 
 	{{-- Print Data Quesiton --}}
 
-	
+
 	<table width="100%">
 		<tr>
 			<td>
@@ -17,7 +17,13 @@
 					<b style="font-size: 35px">{{$testcontent->name." Exam"}}</b>
 				</div>
 	 	 		<div align="right" style="padding-top: 15px">
-	 	 			<a class="btn btn-primary" href="{{route('test.question.create')}}" role="button" >Add Question</a>
+	 	 			<form method="get" action="{{route('test.question.create',['testsubject_id'=>$testsubject->id,'testcontent_id'=>$testcontent->id])}}">
+	 	 					@csrf
+	 	 					{{-- <input type="text" name="testsubject_id" value="{{$testsubject->id}}">
+	 	 					<input type="text" name="testcontent_id" value="{{$testcontent->id}}"> --}}
+	 	 					<input type="submit" class="btn btn-primary" value="Add Quesiton">
+	 	 			</form>
+	 	 			{{-- <a class="btn btn-primary" href="{{route('test.question.create')}}" role="button" >Add Question</a> --}}
 	 	 			{{-- <a class="btn btn-info" href="{{route('test.question.edit',$testcontent->id)}}" role="button" >Edit Question</a> --}}
 	 	 	{{-- 		<a class="btn btn-danger" href="{{route('test.question.delete')}}" role="button" onclick ="confirmdelete()" >Delete Question</a> --}}
 	 	 		</div>

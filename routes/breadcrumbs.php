@@ -37,6 +37,25 @@ Breadcrumbs::for('test.content.edit', function ($trail,$subject,$content) {
     $trail->push('Edit Content', route('test.content.edit','',''));
 });
 
+// Question
+// Subject List > {Subject Name} > {Content Name} > {Question Name} > Create Question
+Breadcrumbs::for('test.question.create', function ($trail,$subject,$content) {
+     $trail->parent('test.subject.index');
+     $trail->push($subject->name, route('test.subject.show',$subject->id));
+     $trail->push($content->name, route('test.content.show',$content->id));
+     $trail->push('Create Question', route('test.content.show',''));
+});
+
+
+// Subject List > {Subject Name} > {Content Name} > {Question Name} > Edit Question
+Breadcrumbs::for('test.question.edit', function ($trail,$subject,$content,$question) {
+    $trail->parent('test.subject.index');
+    $trail->push($subject->name, route('test.subject.show',$subject->id));
+    $trail->push($content->name, route('test.content.show',$content->id));
+    $trail->push($question->question_title, route('test.content.show',$content->id));
+    $trail->push('Edit Question', route('test.question.edit',''));
+});
+
 
 
 
