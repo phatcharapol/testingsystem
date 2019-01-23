@@ -24,7 +24,7 @@ class TestSubjectController extends Controller
 
     public function index()
     {
-        $testsubjects=TestSubject::paginate(10) ;
+        $testsubjects=TestSubject::where('created_by',getUser())->paginate(10) ;
         return view('test.indexsubject',compact('testsubjects'));
     }
 

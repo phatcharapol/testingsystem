@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TestSubject extends Model
 {
     //
-       protected $fillable = ['id','name','created_by','updated_by'];
+       protected $fillable = ['id','name','subjectcode','created_by','updated_by'];
 
        protected $observables = ['created','updated'];
       

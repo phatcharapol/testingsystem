@@ -47,22 +47,38 @@
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="{{route('admin')}}"> <i class="menu-icon fa fa-dashboard"></i>DashBoard </a>
-                    </li>
+
                      @if(Auth::user()->isAdmin())
-                    <h3 class="menu-title">User</h3><!-- /.menu-title -->
-                  {{--   <li class="menu-item-has-children dropdown"> --}}
-                    <li>
-                        <a href="{{route('admin.user.index')}}"><i class="menu-icon fa fa-dashboard"></i> Manage User</a>
-                       {{--  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Manage User</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{route('admin.user.index')}}">CRUD Admin</a></li>
-                        </ul> --}}
-                    </li>
+                         <li class="active">
+                            <a href="{{route('admin')}}"> <i class="menu-icon fa fa-dashboard"></i>DashBoard </a>
+                         </li>
+                     @endif
+
+                    @if(Auth::user()->isTeacher())
+                         <li class="active">
+                            <a href="{{route('teacher')}}"> <i class="menu-icon fa fa-dashboard"></i>DashBoard </a>
+                         </li>
+                     @endif
+
+                     @if(Auth::user()->isStudent())
+                         <li class="active">
+                            <a href="{{route('student')}}"> <i class="menu-icon fa fa-dashboard"></i>DashBoard </a>
+                         </li>
+                     @endif
+
+                     @if(Auth::user()->isAdmin())
+                        <h3 class="menu-title">User</h3><!-- /.menu-title -->
+                      {{--   <li class="menu-item-has-children dropdown"> --}}
+                        <li>
+                            <a href="{{route('admin.user.index')}}"><i class="menu-icon fa fa-dashboard"></i> Manage User</a>
+                           {{--  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Manage User</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-puzzle-piece"></i><a href="{{route('admin.user.index')}}">CRUD Admin</a></li>
+                            </ul> --}}
+                        </li>
                     @endif
                     
-                    @if(Auth::user()->isAdmin() || Auth::user()->isTeacher())
+                    @if(Auth::user()->isTeacher())
                     <h3 class="menu-title">Test</h3><!-- /.menu-title -->
                     <li>
                          <a href="{{route('test.subject.index')}}"> <i class="menu-icon fa fa-dashboard"></i>Manage Test </a>

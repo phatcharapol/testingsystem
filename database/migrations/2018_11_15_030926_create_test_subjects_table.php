@@ -15,6 +15,7 @@ class CreateTestSubjectsTable extends Migration
     {
         Schema::create('test_subjects', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('subjectcode')->unique();
             $table->string('name');
             $table->timestamps();
             $table->string('created_by') ;

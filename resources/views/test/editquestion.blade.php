@@ -51,7 +51,7 @@
 			          			<tr> 
 			          				<td></td>
 			          				<td></td>
-			          				<td><input type="submit" class="btn btn-info" value="Update Question"></td>
+			          				<td><input type="submit" class="btn btn-info" value="Save"></td>
 			          			</tr> 
 			             </tbody> 
 			            

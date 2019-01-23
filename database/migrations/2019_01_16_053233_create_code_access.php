@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestContentsTable extends Migration
+class CreateCodeAccess extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateTestContentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('test_contents', function (Blueprint $table) {
+        Schema::create('codeaccess', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->dateTime('due_date');
-            $table->timestamps();
-            $table->string('created_by') ;
-            $table->string('updated_by') ;
+            $table->string('subjectcode');
+            $table->string('subjectname');
+            $table->string('regis_email');
+            $table->string('regis_name');
+            $table->string('owner_subject');
+            $table->dateTime('join_at');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateTestContentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test_contents');
+        Schema::dropIfExists('codeaccess');
     }
 }

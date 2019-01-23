@@ -17,7 +17,7 @@
       </div>
 
       <div class="form-group">
-         <input type="submit" class="btn btn-info" value="Update Content">
+         <input type="submit" class="btn btn-info" value="Save">
       </div>
      
 

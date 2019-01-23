@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/chgpwd', 'AdminController@chgpwd')->name('admin.chgpwd');
+
+
 Route::group(['middleware' => ['admin']], function () {   
     Route::get('admin', 'AdminController@index')->name('admin');
     Route::resource('admin/user', 'AdminUserController',[
@@ -35,40 +37,49 @@ Route::group(['middleware' => ['admin']], function () {
         // 'edit' => 'admin.user.edit'
         // ]
     ]);
-    Route::resource('test/subject', 'TestSubjectController',[
-    'as' => 'test'
-    ]);
-    Route::resource('test/subject/content', 'TestContentController',[
-    'as' => 'test'
-    ]);
-    Route::resource('test/subject/content/question', 'TestQuestionController',[
-    'as' => 'test',
-    'names' => [
-                'create' => 'test.question.create2'
-            ]
-    ]);
-    Route::get('test/subject/{testsubject_id}/{testcontent_id}/create', 'TestQuestionController@create')->name('test.question.create');
+    // Route::resource('test/subject', 'TestSubjectController',[
+    // 'as' => 'test'
+    // ]);
+    // Route::resource('test/subject/content', 'TestContentController',[
+    // 'as' => 'test'
+    // ]);
+    // Route::resource('test/subject/content/question', 'TestQuestionController',[
+    // 'as' => 'test',
+    // 'names' => [
+    //             'create' => 'test.question.create2'
+    //         ]
+    // ]);
+    // Route::get('test/subject/{testsubject_id}/{testcontent_id}/create', 'TestQuestionController@create')->name('test.question.create');
     
 
 });
-// Route::group(['middleware' => ['teacher']], function () {	
-//     Route::get('/teacher', 'TeacherController@index')->name('teacher');
-// 	Route::resource('test/subject', 'TestSubjectController',[
-//     'as' => 'test'
-//     ]);
-//     Route::resource('test/subject/content', 'TestContentController',[
-//     'as' => 'test'
-//     ]);
-//     Route::resource('test/subject/content/question', 'TestQuestionController',[
-//     'as' => 'test'
-//     ]);
-//     Route::get('test/subject/{testsubject_id}/{testcontent_id}/create', 'TestQuestionController@create')->name('test.question.create');
-// });
+Route::group(['middleware' => ['teacher']], function () {	
+
+     // Dashboard
+         Route::get('/teacher/dashboard', 'TeacherController@index')->name('teacher');
+         Route::get('/teacher/showpeople/{subjectcode}','TeacherController@showpeople')->name('show.people');
+
+    // CRUD Subject
+    	 Route::resource('test/subject', 'TestSubjectController',[
+        'as' => 'test'
+        ]);
+        Route::resource('test/subject/content', 'TestContentController',[
+        'as' => 'test'
+        ]);
+        Route::resource('test/subject/content/question', 'TestQuestionController',[
+        'as' => 'test',
+        'names' => [
+                    'create' => 'test.question.create2'
+                ]
+        ]);
+        Route::get('test/subject/{testsubject_id}/{testcontent_id}/create', 'TestQuestionController@create')->name('test.question.create');
+   
+});
 
 
-// Route::group(['middleware' => ['student']], function () {
-// 	Route::get('/student', 'StudentController@index')->name('student');
-// });
+Route::group(['middleware' => ['student']], function () {
+	Route::get('/student', 'StudentController@index')->name('student');
+});
 
 
 

@@ -13,130 +13,145 @@ class TestContentTableSeeder extends Seeder
     {
         DB::table('test_contents')->insert([
                 [
-                    'name'=>'SCIENCE I',
+                    'name'=>'QUIZ I',
                     'subject_id'=>'1',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                 ],
                 [
-                    'name'=>'SCIENCE II',
+                    'name'=>'QUIZ II',
                     'subject_id'=>'1',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                 ],
 
                 [
-                    'name'=>'SCIENCE III',
+                    'name'=>'QUIZ III',
                     'subject_id'=>'1',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                 ],
 
                 [
-                    'name'=>'MUSIC I',
+                    'name'=>'QUIZ I',
                     'subject_id'=>'2',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
                     [
-                    'name'=>'MUSIC II',
+                    'name'=>'QUIZ II',
                     'subject_id'=>'2',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
 
                     [
-                    'name'=>'MUSIC III',
+                    'name'=>'QUIZ III',
                     'subject_id'=>'2',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                 ],
                 [
-                    'name'=>'MATH I',
+                    'name'=>'QUIZ I',
                     'subject_id'=>'3',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
                     [
-                    'name'=>'MATH II',
+                    'name'=>'QUIZ II',
                     'subject_id'=>'3',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
 
                     [
-                    'name'=>'MATH III',
+                    'name'=>'QUIZ III',
                     'subject_id'=>'3',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
                 [
-                    'name'=>'ENGLISH',
+                    'name'=>'QUIZ I',
                     'subject_id'=>'4',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
                     [
-                    'name'=>'SPAIN',
+                    'name'=>'QUIZ II',
                     'subject_id'=>'4',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
 
                     [
-                    'name'=>'FRANCE',
+                    'name'=>'QUIZ III',
                     'subject_id'=>'4',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
                     [
-                    'name'=>'ART I',
+                    'name'=>'QUIZ I',
                     'subject_id'=>'5',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
                     [
-                    'name'=>'ART II',
+                    'name'=>'QUIZ II',
                     'subject_id'=>'5',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
 
                     [
-                    'name'=>'ART III',
+                    'name'=>'QUIZ III',
                     'subject_id'=>'5',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     'created_by' => 'System',
-                    'updated_by' => 'System'
+                    'updated_by' => 'System',
+                    'due_date' => Carbon::now()
                     ],
 
         ]);

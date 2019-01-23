@@ -16,7 +16,7 @@ class Student
     public function handle($request, Closure $next)
     {
          if(Auth::check()){
-            if(Auth::user()->isStudent() || Auth::user()->isTeacher() || Auth::user()->isAdmin()){
+            if(Auth::user()->isStudent()){
                 return $next($request);
             }
         }
