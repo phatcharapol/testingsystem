@@ -43,32 +43,43 @@ class TestQuestionController extends Controller
     public function store(TestQuestionRequest $request)
     {
         //
-        // dd($request->all());
         $input=$request->all() ;
-        TestQuestion::create([
-            'subject_id'=>$request->subject_id,
-            'content_id'=>$request->content_id,
-            'question_title'=>$request->question_title,
-            'created_by'=>getUser(),
-            'updated_by'=>getUser()
-        ]);
-        $testquestion=\DB::table('test_questions')->orderBy('id','desc')->first();
-        $correct_ans = array("1"=>"0","2"=>"0","3"=>"0","4"=>"0") ;
-        $correct_ans[$request->ChoiceCorrect] = '1';
-    
-        for($i=1;$i<=4;$i++){
-   
-             TestQuestionDetail::create([
+
+
+        // Manage Data
+          
+           //Insert Question
+            foreach ($input['question_title'] as $qno => $qname) {
+                 $testquestion= TestQuestion::create([
+                        'subject_id'=>$request->subject_id,
+                        'content_id'=>$request->content_id,
+                        'question_title'=>$qname,
+                        'created_by'=>getUser(),
+                        'updated_by'=>getUser()
+            ]);  
+                 foreach ($input[($qno+1).'ChoiceDetail'] as $key => $value) {
+                    
+                    // $testquestion=\DB::table('test_questions')->orderBy('id','desc')->first();
+                    $correct_ans = array("1"=>"0","2"=>"0","3"=>"0","4"=>"0") ;
+                    $correct_ans[$input[($qno+1).'ChoiceCorrect']] = '1';
+                
+                 $testquestiondetail=$testquestion->TestQuestionDetails()->create([
                     'subject_id'=>$input['subject_id'],
                     'content_id'=>$input['content_id'],
                     'question_id'=>$testquestion->id,
-                    'SeqChoice'=>$input['C'.$i],
-                    'ChoiceDetail'=>$input['ChoiceDetail'.$i],
-                    'Score'=>$correct_ans[$i],
+                    'SeqChoice'=>$key+1,
+                    'ChoiceDetail'=>$value,
+                    'Score'=>$correct_ans[$key+1],
                     'created_by'=>getUser(),
                     'updated_by'=>getUser()
-            ]);
-        }
+                     
+                     ]);
+                }
+                         
+            }
+          
+        
+
         
         Session::flash('msg','Question has been created..') ;
          return redirect('test/subject/content/'.$testquestion->content_id);
@@ -95,9 +106,18 @@ class TestQuestionController extends Controller
     {
 
          $testquestion=TestQuestion::findOrFail($id);
-         $testquestiondetails = TestQuestion::findOrFail($id)->TestQuestionDetails()->get();
-         $testsubject=TestSubject::find($testquestion->subject_id);
-         $testcontent=TestContent::find($testquestion->content_id);
+         $testquestiondetails = $testquestion->TestQuestionDetails()->get();
+
+         // dd($testquestion->TestContent());
+         $testcontent=$testquestion->TestContent()->get();
+
+         $testcontent=$testcontent[0];
+   
+         $testsubject=$testcontent->TestSubject()->get();
+         dd($testsubject);
+         // $testquestiondetails = TestQuestion::findOrFail($id)->TestQuestionDetails()->get();
+         // $testsubject=TestSubject::find($testquestion->subject_id);
+         // $testcontent=TestContent::find($testquestion->content_id);
         
          return view('test.editquestion',compact('testquestion','testquestiondetails','testsubject','testcontent'));
     }

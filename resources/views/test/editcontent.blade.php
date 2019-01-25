@@ -13,7 +13,7 @@
         <input type="hidden" name="subject_id" value="{{$testsubject->id}}">
       <div class="form-group">
           <label>Content Name</label>
-          <input type="text" class="form-control" name="name" value="{{$testcontent->name}}" required>
+          <input type="text" class="form-control" name="name" value="{{$testcontent->name}}" autocomplete="off" required>
       </div>
 
       <div class="form-group">

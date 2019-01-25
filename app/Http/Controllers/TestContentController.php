@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\TestContentRequest;
-use App\Http\Requests\TestContentUpdateRequest;
+use App\Http\Requests\TestContentCreateRequest;
 use App\TestContent; 
-use App\TestSubject; 
-use App\TestQuestion;
-use App\TestQuestionDetail;
+
 use Session ;
 
 class TestContentController extends Controller
@@ -31,7 +28,7 @@ class TestContentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TestContentRequest $request)
+    public function store(TestContentCreateRequest $request)
     {
         //
         $input=$request->all();
@@ -53,28 +50,20 @@ class TestContentController extends Controller
         //
    
         $testcontent=TestContent::findOrFail($id) ;
-        $testsubject=TestSubject::findOrFail($testcontent->subject_id) ;
-        $testquestions = TestContent::findOrFail($id)->TestQuestions()->get() ;
+        $testsubject=$testcontent->TestSubject()->get();
+        $testquestions = $testcontent->TestQuestions()->get() ;
 
         $questions =array() ;
         foreach ($testquestions->all() as $key => $testquestion) {
-            $testquestiondetails=TestQuestion::findOrFail($testquestion->id)->TestQuestionDetails()->get() ;
+            $testquestiondetails=$testquestion->TestQuestionDetails()->get() ;
             foreach ($testquestiondetails->all() as $key => $testquestiondetail) {
                   $questions[$testquestion->id][$testquestion->question_title][$testquestiondetail->SeqChoice]=$testquestiondetail->ChoiceDetail."-".$testquestiondetail->Score ;
               }  
             
         }
-
-        // $testquestions = $testquestions->all() ;
-
-        // $testquestions=TestQuestion::where('content_id',$id)
-        //             ->where('subject_id',$testcontent->subject_id)
-        //             ->get();
-      
-        // $testquestiondetails=TestQuestionDetail::where('content_id',$id)
-        //             ->where('subject_id',$testcontent->subject_id)
-        //             ->get();
-
+        $testsubject=$testsubject[0];
+ 
+       
          return view('test.indexquestion',compact('testsubject','testcontent','questions'));
 
 
@@ -90,7 +79,8 @@ class TestContentController extends Controller
     {
         //
         $testcontent=TestContent::findOrFail($id) ;
-        $testsubject=TestSubject::findOrFail($testcontent->subject_id) ;
+        $testsubject=$testcontent->TestSubject()->get() ;
+        $testsubject=$testsubject[0];
         return view('test.editcontent',compact('testsubject','testcontent')) ;
     }
 
@@ -101,7 +91,7 @@ class TestContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TestContentUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
         $testcontent=TestContent::findOrFail($id);

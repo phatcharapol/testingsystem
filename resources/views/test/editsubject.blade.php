@@ -11,7 +11,7 @@
      <input name="_method" type="hidden" value="PUT">
       <div class="form-group">
           <label>Subject Name</label>
-          <input type="text" class="form-control" name="name" value="{{$testsubject->name}}" required>
+          <input type="text" class="form-control" name="name" autocomplete="off" value="{{$testsubject->name}}" required>
       </div>
 
       <div class="form-group">

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TestContentUpdateRequest extends FormRequest
+class TestContentCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class TestContentUpdateRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|max:20',
+            'name' => 'unique:test_contents,name'
         ];
     }
 }

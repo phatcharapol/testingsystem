@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Http\Requests\TestSubjectRequest;
-use App\Http\Requests\TestSubjectUpdateRequest;
+use App\Http\Requests\TestSubjectCreateRequest;
 use App\TestSubject;
-use App\TestContent;
 use Session ;
 
 class TestSubjectController extends Controller
@@ -40,7 +38,7 @@ class TestSubjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TestSubjectRequest $request)
+    public function store(TestSubjectCreateRequest $request)
     {
         $input=$request->all() ;
         $input['created_by'] = getUser() ;
@@ -59,8 +57,8 @@ class TestSubjectController extends Controller
     public function show($id)
     {
         //
-        $testcontents=TestContent::where('subject_id',$id)->paginate(10) ;
         $testsubject=TestSubject::findOrFail($id);
+        $testcontents=$testsubject->TestContents()->paginate(10);
         return view('test.indexcontent',compact('testcontents','testsubject')) ;
     }
 
@@ -84,7 +82,7 @@ class TestSubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TestSubjectUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
         $testsubject=TestSubject::findOrFail($id);

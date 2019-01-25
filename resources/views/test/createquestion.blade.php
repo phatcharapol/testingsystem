@@ -5,74 +5,65 @@
 
     {{ Breadcrumbs::render('test.question.create',$testsubject,$testcontent) }}
 	   <br><h3>Create Question</h3><br>
-    
-    <input type="text" id="member" name="member" value="" required>Number of Question: (max. 20)
-<a href="#" class='btn btn-primary' onclick="addQuestion()">Make</a>
 
+      <form onsubmit="return addQuestion()"">
+       
+          <label>Number of Question:</label>
+          <input type="number" id="number" name="number" autocomplete="off" required>
+          <input type="submit" class="btn btn-primary" value="Generate Questions" >
+       
+      </form>
 
-    <table class="table" width="100%">
+        <br />
+
         <form  method="POST" action="{{route('test.question.store')}}">
+           <table class="table" width="100%">
         @csrf
                   <input type="hidden" name="subject_id" value="{{$testsubject->id}}" >
                   <input type="hidden" name="content_id" value="{{$testcontent->id}}" >
-            
-          <div class="form-group">
-          
-              <thead>
-                <tr>
-                   <th>Q:</th>
-                   <th><input type="text" name="question_title" size="50" required></th>  
-                   <th></th> 
-              </tr>
-              </thead>
-                  <tbody>
-                    @for($i=1;$i<=4;$i++)
-                 <tr>
-                  <input type="hidden" name="C{{$i}}" value="{{$i}}" >
-                  <td width="3%">{{$i.") "}}</td>
-                  <td>
-                    <input type="radio" name="ChoiceCorrect" value={{$i}}  required > 
-                    <input type="text" name="ChoiceDetail{{$i}}" size="40" required>
-                  </td>
-                </tr>
-                    @endfor 
-                      <tr> 
-                        <td></td>
-                        <td></td>
-                        <td><input type="submit" class="btn btn-primary" value="Create Question"></td>
-                      </tr> 
-                   </tbody> 
+                         <div class="form-group"></div>
+                   {{--  <thead>
+                      <tr>
+                         <th>Q:</th>
+                         <th><input type="text" name="question_title" size="50" required></th>  
+                         <th></th> 
+                    </tr>
+                    </thead>
+                        <tbody>
+                          @for($i=1;$i<=4;$i++)
+                       <tr>
+                        <input type="hidden" name="C{{$i}}" value="{{$i}}" >
+                        <td width="3%">{{$i.") "}}</td>
+                        <td>
+                          <input type="radio" name="ChoiceCorrect" value={{$i}}  required > 
+                          <input type="text" name="ChoiceDetail{{$i}}" size="40" required>
+                        </td>
+                      </tr>
+                          @endfor 
+                            <tr> 
+                              <td></td>
+                              <td></td>
+                      
+                              <td><input type="submit" class="btn btn-primary" value="Create Question"></td>
+                            </tr> 
+                         </tbody>  --}}
+              
              
-                </div>
-                  
+                     </table>
             </form>
              
-      </table>
+    
 
   @include('include.error')
 
-	 
-   
-</div>
-@endsection
-
-<script type="text/javascript">
-  // function CheckColor(){
-  //   var checked=document.getElementsByName('ChoiceCorrect').checked ;
-  //   var td=document.getElementsByTagName('td') ;
-  //   for(i=0;i<td.length;i++){
-  //       if(checked)
-  //       td[i].style.backgroundColor = "red";
-  //   }
-
-  // }
-
+	 <script type="text/javascript">
 
   function addQuestion(){
            
-            var number = document.getElementById("member").value;
+            var number = document.getElementById("number").value;
             var container = document.getElementsByClassName("form-group")[0];
-               
+                 
+             
             while (container.hasChildNodes()) {
                 container.removeChild(container.lastChild);
             }
@@ -81,7 +72,8 @@
 
                 var thead = document.createElement("thead");
                 var tr = document.createElement("tr");
-                var th = document.createElement("th"); 
+                var th = document.createElement("th");
+
 
               var text = document.createTextNode("Q"+n+" : ");
                 th.appendChild(text);
@@ -89,10 +81,11 @@
               
                 var th = document.createElement("th"); 
                
-              var i = document.createElement("input"); //input element, text
+              var i = document.createElement("input"); //input  text
                   i.setAttribute('type',"text");
-                  i.setAttribute('name',"question_title");
+                  i.setAttribute('name',"question_title[]");
                   i.setAttribute('size',"50");
+                  i.setAttribute('autocomplete',"off");
                   i.setAttribute('required',"");
                 th.appendChild(i);
                 tr.appendChild(th);
@@ -108,15 +101,14 @@
                 for (var j = 1; j <=4 ; j++) {
 
                   var tr = document.createElement("tr"); 
-                  var i = document.createElement("input"); //input element, text
+                  var i = document.createElement("input"); //input  hidden
                       i.setAttribute('type',"hidden");
-                      i.setAttribute('name',"C"+j);     
-                      i.setAttribute('value',j);    
-                  tBody.appendChild(i);
+                      i.setAttribute('name',n+"C[]");     
+                      i.setAttribute('value',j);   
+                  tr.appendChild(i);
               
-                  var tr = document.createElement("tr"); 
                   var td = document.createElement("td");  
-           
+                  td.setAttribute('width','3%'); 
           
                   td.appendChild(document.createTextNode(j+" ) "));
                   tr.appendChild(td);
@@ -124,15 +116,17 @@
      
 
                   var td = document.createElement("td");
-                  var i = document.createElement("input"); //input element, text
+                  var i = document.createElement("input"); //input radio
                       i.setAttribute('type',"radio");
-                      i.setAttribute('name',"ChoiceCorrect");     
+                      i.setAttribute('name',n+"ChoiceCorrect");   
+                      i.setAttribute('value',j);   
                       i.setAttribute('required',"");    
                   td.appendChild(i);
-                  var i = document.createElement("input"); //input element, text
+                  var i = document.createElement("input"); //input text
                       i.setAttribute('type',"text");
-                      i.setAttribute('name',"ChoiceDetail"+j);
+                      i.setAttribute('name',n+"ChoiceDetail[]");
                       i.setAttribute('size',"40");
+                      i.setAttribute('autocomplete',"off");
                       i.setAttribute('required',"");
                   td.appendChild(i);
                   tr.appendChild(td);
@@ -144,7 +138,7 @@
             }
             var tr = document.createElement("tr");
             var td = document.createElement("td");
-            var i = document.createElement("input"); //input element, Submit button
+            var i = document.createElement("input"); //input  Submit button
             i.setAttribute('type',"submit");
             i.setAttribute('class',"btn btn-primary");
             i.setAttribute('value',"Create Question");
@@ -152,11 +146,21 @@
             tr.appendChild(td);
             tBody.appendChild(tr);
             container.appendChild(tBody);
-          
 
-
+             var table = document.getElementsByTagName("table")[0] ;
+             table.append(container);
+        
+             return false ;
+           
         }
+
+        
 
 
 </script>
+   
+</div>
+@endsection
+
+
 

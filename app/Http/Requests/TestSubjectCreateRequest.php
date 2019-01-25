@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TestContentRequest extends FormRequest
+class TestSubjectCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class TestContentRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|unique:test_contents,name|max:20'
+             'name' => 'unique:test_subjects,name'
         ];
     }
 }

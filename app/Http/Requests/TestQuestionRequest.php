@@ -24,7 +24,7 @@ class TestQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'question_title' =>'unique:test_questions,question_title|max:100|min:5' ,
+            
         ];
     }
 }
